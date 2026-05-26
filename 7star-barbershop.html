@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Star Barber Shop – Waltham, MA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Syne:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #080808;
+  --dark: #111111;
+  --dark2: #181818;
+  --gold: #D4A843;
+  --gold2: #F0C96A;
+  --white: #F5F0E8;
+  --gray: #888;
+  --muted: #444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.18s ease;
+  opacity: 0.5;
+}
+body:hover .cursor { opacity: 1; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 68px;
+  background: rgba(8,8,8,0.95);
+  border-bottom: 1px solid rgba(212,168,67,0.12);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.nav-logo span { color: var(--gold); }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-book {
+  background: var(--gold);
+  color: var(--black) !important;
+  padding: 0.5rem 1.4rem;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  transition: background 0.2s, transform 0.15s !important;
+}
+.nav-book:hover { background: var(--gold2) !important; transform: translateY(-1px); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 1.5px; background: var(--white); display: block; }
+
+/* MOBILE NAV */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 490;
+  background: var(--black);
+  flex-direction: column; align-items: center; justify-content: center; gap: 3rem;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--white); text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+}
+.mob-nav a:hover { color: var(--gold); }
+.mob-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--gray); font-size: 1.6rem; cursor: pointer; }
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 100vh; min-height: 640px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.hero-left {
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5rem 3rem;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.hero-left::before {
+  content: '7★';
+  position: absolute;
+  top: -1rem; left: -1rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18rem;
+  font-weight: 900;
+  color: rgba(212,168,67,0.04);
+  pointer-events: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); display: inline-block; }
+
+.hero h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+.hero h1 .gold { color: var(--gold); }
+.hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--white);
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: 0.92rem;
+  color: var(--gray);
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.85rem 2rem;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+.btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 1px solid rgba(245,240,232,0.2);
+  color: var(--white);
+  padding: 0.85rem 2rem;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: border-color 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-rating {
+  position: absolute;
+  top: 2.5rem; right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.rating-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gold);
+}
+.rating-stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 3px; }
+.rating-count { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+
+/* HERO RIGHT – photo mosaic */
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=85') center / cover no-repeat;
+}
+
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--dark) 0%, transparent 30%);
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 3rem; right: 2.5rem;
+  background: var(--gold);
+  color: var(--black);
+  padding: 1rem 1.2rem;
+  text-align: center;
+  z-index: 2;
+}
+.hero-badge-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  display: block;
+}
+.hero-badge-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px; display: block; }
+
+/* TICKER */
+.ticker {
+  background: var(--gold);
+  padding: 0.8rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: tickMove 30s linear infinite;
+}
+@keyframes tickMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.tick-item {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--black);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.tick-star { font-size: 0.55rem; opacity: 0.45; }
+
+/* ABOUT */
+#about {
+  background: var(--dark);
+  padding: 8rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#about::after {
+  content: 'BARBER';
+  position: absolute;
+  bottom: -2rem; right: -1rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.about-img-wrap {
+  position: relative;
+  height: 520px;
+}
+
+.about-main-img {
+  position: absolute;
+  top: 0; right: 0;
+  width: 85%;
+  height: 88%;
+  object-fit: cover;
+}
+
+.about-accent-img {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 55%;
+  height: 56%;
+  object-fit: cover;
+  border: 5px solid var(--dark);
+}
+
+.about-years {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-80%, -50%);
+  background: var(--gold);
+  color: var(--black);
+  width: 90px; height: 90px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 3;
+}
+.about-years-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.about-years-label { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.about-text .tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.about-text .tag::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+
+.about-text h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.85;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+}
+.chip {
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* SERVICES */
+#services {
+  background: var(--black);
+  padding: 8rem 3rem;
+}
+
+.services-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.services-head h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--white);
+}
+.services-head h2 span { color: var(--gold); display: block; }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--muted);
+}
+
+.svc-card {
+  background: var(--dark);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+}
+
+.svc-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.svc-card:hover { background: #1a1a1a; }
+.svc-card:hover::before { transform: scaleX(1); }
+
+.svc-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  opacity: 0.6;
+}
+
+.svc-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+
+.svc-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+.svc-desc {
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* GALLERY */
+#gallery {
+  background: var(--dark2);
+  padding: 8rem 0;
+}
+
+.gallery-head { padding: 0 3rem; margin-bottom: 2.5rem; }
+.gallery-head h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.gallery-head h2 em { font-style: normal; color: var(--gold); }
+
+.gal-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  grid-template-rows: 300px 300px;
+  gap: 2px;
+}
+.gal-cell { overflow: hidden; position: relative; }
+.gal-cell:first-child { grid-row: 1 / 3; }
+.gal-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: grayscale(20%);
+}
+.gal-cell:hover img { transform: scale(1.07); filter: grayscale(0%); }
+.gal-cell::after { content: ''; position: absolute; inset: 0; background: rgba(8,8,8,0.25); transition: opacity 0.3s; }
+.gal-cell:hover::after { opacity: 0; }
+
+/* REVIEWS */
+#reviews {
+  background: var(--dark);
+  padding: 8rem 3rem;
+}
+
+.reviews-head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.reviews-head .tag {
+  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 1rem;
+}
+.reviews-head h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900; letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.rev-card {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem;
+  transition: border-color 0.2s;
+  position: relative;
+}
+.rev-card:hover { border-color: rgba(212,168,67,0.3); }
+.rev-quote {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 4rem; font-weight: 900;
+  line-height: 0.6;
+  color: var(--gold);
+  opacity: 0.25;
+  margin-bottom: 0.5rem;
+}
+.rev-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 1rem; }
+.rev-text {
+  font-size: 0.9rem;
+  color: rgba(245,240,232,0.7);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 1.25rem;
+}
+.rev-name {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rev-big {
+  background: var(--gold);
+  padding: 2rem;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+}
+.rev-big-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 5rem; font-weight: 900;
+  line-height: 1; color: var(--black);
+}
+.rev-big-stars { color: var(--black); font-size: 0.9rem; letter-spacing: 3px; margin-top: 0.3rem; }
+.rev-big-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(0,0,0,0.55); margin-top: 0.5rem;
+}
+
+/* BOOKING / CONTACT */
+#book {
+  background: var(--black);
+  padding: 8rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#book::before {
+  content: 'BOOK';
+  position: absolute;
+  top: -2rem; left: -1rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18rem; font-weight: 900;
+  color: rgba(212,168,67,0.03);
+  pointer-events: none; white-space: nowrap;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: start;
+  position: relative; z-index: 1;
+}
+
+.book-info h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 900; letter-spacing: -0.03em;
+  color: var(--white); line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.book-info h2 span { color: var(--gold); display: block; }
+
+.book-info > p {
+  font-size: 0.88rem; color: var(--gray);
+  line-height: 1.75; margin: 1.25rem 0 2rem;
+}
+
+.contact-row {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.c-row {
+  display: flex; align-items: flex-start; gap: 1rem;
+}
+.c-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.c-row h4 {
+  font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.c-row p, .c-row a {
+  font-size: 0.9rem; color: rgba(245,240,232,0.65);
+  text-decoration: none; font-weight: 400;
+  transition: color 0.2s; display: block;
+}
+.c-row a:hover { color: var(--gold); }
+
+.hours-list { display: flex; flex-direction: column; gap: 0.25rem; }
+.hr-row { display: flex; gap: 1.5rem; font-size: 0.83rem; }
+.hr-day { color: rgba(245,240,232,0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; min-width: 90px; }
+.hr-time { color: rgba(245,240,232,0.65); }
+
+/* FORM */
+.book-form-wrap {
+  background: var(--dark);
+  border: 1px solid rgba(212,168,67,0.15);
+  padding: 2.5rem;
+}
+.book-form-wrap h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.2rem; font-weight: 900;
+  letter-spacing: -0.02em; color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.book-form-wrap > p { font-size: 0.82rem; color: var(--gray); margin-bottom: 2rem; }
+
+.b-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; }
+.field label {
+  font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gray); font-weight: 500;
+}
+.field input, .field select, .field textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.75rem 1rem;
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem; font-weight: 400;
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.field input::placeholder, .field textarea::placeholder { color: rgba(136,136,136,0.4); }
+.field select option { background: var(--dark2); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: rgba(212,168,67,0.5);
+  background: rgba(255,255,255,0.06);
+}
+.field textarea { resize: vertical; min-height: 90px; }
+
+.form-btn {
+  background: var(--gold); color: var(--black);
+  border: none; padding: 1rem 2rem;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  align-self: flex-start; margin-top: 0.5rem;
+}
+.form-btn:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.form-ok {
+  display: none; padding: 1rem 1.25rem;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold); font-size: 0.85rem; margin-top: 0.5rem;
+}
+
+/* MAP */
+#location {
+  background: var(--dark2);
+  padding: 0;
+  position: relative;
+}
+.map-wrap { height: 420px; }
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+.map-overlay {
+  position: absolute;
+  top: 50%; left: 3rem;
+  transform: translateY(-50%);
+  background: var(--black);
+  padding: 2rem 2.5rem;
+  border-left: 3px solid var(--gold);
+  z-index: 2;
+  max-width: 300px;
+}
+.map-overlay h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1rem; font-weight: 900;
+  letter-spacing: -0.02em; color: var(--white); margin-bottom: 0.5rem;
+}
+.map-overlay p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+.map-overlay a {
+  display: inline-block; margin-top: 1rem;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border-bottom: 1px solid rgba(212,168,67,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.map-overlay a:hover { border-color: var(--gold); }
+
+/* FOOTER */
+footer {
+  background: #040404;
+  padding: 3rem;
+  border-top: 1px solid rgba(212,168,67,0.1);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-logo {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.2rem; font-weight: 900;
+  letter-spacing: -0.02em; color: var(--white);
+}
+.footer-logo span { color: var(--gold); }
+
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a {
+  text-decoration: none; font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.2s; font-weight: 500;
+}
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy { font-size: 0.72rem; color: var(--muted); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.v { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+  .hero-left { padding: 6rem 1.5rem 3rem; min-height: 100vh; justify-content: flex-end; }
+  .hero-right { display: none; }
+  #about { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+  .about-img-wrap { height: 300px; }
+  #services { padding: 5rem 1.5rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  #gallery { padding: 5rem 0; }
+  .gallery-head { padding: 0 1.5rem; }
+  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-cell:first-child { grid-row: auto; }
+  #reviews { padding: 5rem 1.5rem; }
+  #book { padding: 5rem 1.5rem; }
+  .book-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .map-overlay { position: static; transform: none; max-width: 100%; border-left: none; border-top: 3px solid var(--gold); }
+  footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#gallery" onclick="closeMob()">Gallery</a>
+  <a href="#reviews" onclick="closeMob()">Reviews</a>
+  <a href="#book" onclick="closeMob()">Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">7<span>★</span> Star Barber</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#book" class="nav-book">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Waltham, MA · Est. Barber Shop</div>
+    <h1>
+      <span class="gold">7 STAR</span>
+      <span>BARBER</span>
+      <span class="outline">SHOP</span>
+    </h1>
+    <p class="hero-desc">Precision cuts, expert fades, braids, and beard grooming — serving Waltham and Greater Boston with craft and style. Walk-ins welcome, appointments recommended.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-gold">Book Appointment</a>
+      <a href="tel:+18575402164" class="btn-ghost">Call (857) 540-2164</a>
+    </div>
+    <div class="hero-rating">
+      <div class="rating-num">4.4</div>
+      <div class="rating-stars">★★★★☆</div>
+      <div class="rating-count">58 Google Reviews</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo"></div>
+    <div class="hero-photo-overlay"></div>
+    <div class="hero-badge">
+      <span class="hero-badge-num">7★</span>
+      <span class="hero-badge-label">Top Rated</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="tick-item"><span class="tick-star">★</span> Haircuts</span>
+    <span class="tick-item"><span class="tick-star">★</span> Fades</span>
+    <span class="tick-item"><span class="tick-star">★</span> Braids</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Trim</span>
+    <span class="tick-item"><span class="tick-star">★</span> Hair Coloring</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Dyeing</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Conditioning</span>
+    <span class="tick-item"><span class="tick-star">★</span> Kids Cuts</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Maintenance</span>
+    <span class="tick-item"><span class="tick-star">★</span> Haircuts</span>
+    <span class="tick-item"><span class="tick-star">★</span> Fades</span>
+    <span class="tick-item"><span class="tick-star">★</span> Braids</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Trim</span>
+    <span class="tick-item"><span class="tick-star">★</span> Hair Coloring</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Dyeing</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Conditioning</span>
+    <span class="tick-item"><span class="tick-star">★</span> Kids Cuts</span>
+    <span class="tick-item"><span class="tick-star">★</span> Beard Maintenance</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <img class="about-main-img" src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&q=80" alt="Barber working with precision" loading="lazy">
+    <img class="about-accent-img" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80" alt="Beard grooming close up" loading="lazy">
+    <div class="about-years">
+      <span class="about-years-num">7★</span>
+      <span class="about-years-label">Stars</span>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="tag">Who We Are</div>
+    <h2>CRAFT. STYLE. COMMUNITY.</h2>
+    <p>7 Star Barber Shop is Waltham's go-to spot for precision cuts, clean fades, expert braids, and top-tier beard care. We pride ourselves on quality work and a welcoming environment for everyone — from kids getting their first cut to regulars who've trusted us for years.</p>
+    <p>Our stylists — including Evelyn, a beloved long-time favorite — bring skill, care, and personality to every chair. Come in, relax, and leave looking your best.</p>
+    <p>Walk-ins are always welcome, but appointments are recommended so we can give you the attention you deserve.</p>
+    <div class="about-chips">
+      <span class="chip">Good for Kids</span>
+      <span class="chip">Walk-ins Welcome</span>
+      <span class="chip">Braids Specialist</span>
+      <span class="chip">Beard Expert</span>
+      <span class="chip">All Hair Types</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-head reveal">
+    <h2>OUR<span>SERVICES</span></h2>
+    <a href="#book" class="btn-gold">Book a Service</a>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <span class="svc-icon">✂️</span>
+      <div class="svc-name">Haircuts & Fades</div>
+      <p class="svc-desc">Clean, precise cuts tailored to your style. From classic cuts to modern fades — we do it all with care and skill.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <span class="svc-icon">🎨</span>
+      <div class="svc-name">Hair Coloring</div>
+      <p class="svc-desc">Bold or subtle — our stylists handle color treatments to refresh or transform your look.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <span class="svc-icon">💈</span>
+      <div class="svc-name">Braids</div>
+      <p class="svc-desc">We specialize in braids — from simple styles to intricate patterns. All braid types, all hair textures.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <span class="svc-icon">🧔</span>
+      <div class="svc-name">Beard Trim & Shape</div>
+      <p class="svc-desc">Sharp line-ups, clean shaves, and expert shaping to keep your beard looking its best every day.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <span class="svc-icon">🌿</span>
+      <div class="svc-name">Beard Conditioning</div>
+      <p class="svc-desc">Hydrate and soften your beard with our conditioning treatments — healthy beard, better look.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">06</div>
+      <span class="svc-icon">👦</span>
+      <div class="svc-name">Kids Cuts</div>
+      <p class="svc-desc">A comfortable, friendly environment for kids' first cuts and regular trims. Patience is our specialty.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-head reveal">
+    <h2>THE <em>SHOP</em></h2>
+  </div>
+  <div class="gal-grid reveal">
+    <div class="gal-cell">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=900&q=80" alt="Barbershop interior chairs" loading="lazy">
+    </div>
+    <div class="gal-cell">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="Haircut in progress" loading="lazy">
+    </div>
+    <div class="gal-cell">
+      <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=600&q=80" alt="Barber tools" loading="lazy">
+    </div>
+    <div class="gal-cell">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80" alt="Fade haircut close up" loading="lazy">
+    </div>
+    <div class="gal-cell">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80" alt="Beard grooming" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-head reveal">
+    <div class="tag">What Clients Say</div>
+    <h2>REAL REVIEWS</h2>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="rev-big">
+      <div class="rev-big-num">4.4</div>
+      <div class="rev-big-stars">★★★★☆</div>
+      <div class="rev-big-label">58 Google Reviews</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-quote">"</div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Evelyn has been my hair stylist for years and I love her work! She always knows exactly what I want and delivers every single time.</p>
+      <div class="rev-name">— Loyal Customer</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-quote">"</div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Superb spot! Great service, great atmosphere. The barbers are talented and take their time to get it right. Will definitely be back.</p>
+      <div class="rev-name">— Google Reviewer</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-quote">"</div>
+      <div class="rev-stars">★★★★☆</div>
+      <p class="rev-text">Good barbershop with nice services. The staff is friendly and the cuts are clean. Convenient location and fair pricing.</p>
+      <div class="rev-name">— Google Reviewer</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book">
+  <div class="book-grid">
+    <div class="book-info reveal">
+      <h2>BOOK<span>YOUR CUT</span></h2>
+      <p>Walk-ins are always welcome — but booking ahead means no wait and a reserved spot just for you. Fill out the form or give us a call directly.</p>
+
+      <div class="contact-row">
+        <div class="c-row">
+          <span class="c-icon">📞</span>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+18575402164">(857) 540-2164</a>
+          </div>
+        </div>
+        <div class="c-row">
+          <span class="c-icon">📍</span>
+          <div>
+            <h4>Address</h4>
+            <p>83 Prospect St, Waltham, MA 02453</p>
+          </div>
+        </div>
+        <div class="c-row">
+          <span class="c-icon">🕐</span>
+          <div>
+            <h4>Hours</h4>
+            <div class="hours-list">
+              <div class="hr-row"><span class="hr-day">Mon – Fri</span><span class="hr-time">9:00 AM – 9:00 PM</span></div>
+              <div class="hr-row"><span class="hr-day">Saturday</span><span class="hr-time">9:00 AM – 7:00 PM</span></div>
+              <div class="hr-row"><span class="hr-day">Sunday</span><span class="hr-time">10:00 AM – 5:00 PM</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-form-wrap reveal">
+      <h3>Request an Appointment</h3>
+      <p>We'll confirm your booking by phone. Walk-ins also welcome anytime.</p>
+      <form class="b-form" id="bookForm" onsubmit="sendForm(event)">
+        <div class="form-row">
+          <div class="field">
+            <label for="bf-name">Your Name</label>
+            <input type="text" id="bf-name" placeholder="First & Last Name" required>
+          </div>
+          <div class="field">
+            <label for="bf-phone">Phone Number</label>
+            <input type="tel" id="bf-phone" placeholder="(857) 000-0000" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bf-service">Service</label>
+          <select id="bf-service" required>
+            <option value="" disabled selected>Choose a service…</option>
+            <option>Haircut / Fade</option>
+            <option>Hair Coloring</option>
+            <option>Braids</option>
+            <option>Beard Trim & Shape</option>
+            <option>Beard Conditioning</option>
+            <option>Beard Dyeing</option>
+            <option>Kids Cut</option>
+            <option>Multiple Services</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="bf-date">Preferred Date</label>
+            <input type="date" id="bf-date">
+          </div>
+          <div class="field">
+            <label for="bf-time">Preferred Time</label>
+            <select id="bf-time">
+              <option value="" disabled selected>Select time…</option>
+              <option>9:00 AM</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>12:00 PM</option>
+              <option>1:00 PM</option>
+              <option>2:00 PM</option>
+              <option>3:00 PM</option>
+              <option>4:00 PM</option>
+              <option>5:00 PM</option>
+              <option>6:00 PM</option>
+              <option>7:00 PM</option>
+              <option>8:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bf-notes">Notes (optional)</label>
+          <textarea id="bf-notes" placeholder="Any requests, style references, or details…"></textarea>
+        </div>
+        <button type="submit" class="form-btn">Request Appointment →</button>
+        <div class="form-ok" id="formOk">✓ Got it! We'll call you to confirm your appointment shortly.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div id="location" style="position:relative;">
+  <div class="map-overlay">
+    <h3>7 Star Barber Shop</h3>
+    <p>83 Prospect St<br>Waltham, MA 02453</p>
+    <a href="https://maps.google.com/?q=83+Prospect+St,+Waltham,+MA+02453" target="_blank">Get Directions →</a>
+  </div>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.5!2d-71.2365!3d42.3765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e382d779fac813%3A0x36e9325e35026600!2s7%20Star%20Barber%20Shop!5e0!3m2!1sen!2sus!4v1700000000000"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="7 Star Barber Shop location">
+    </iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">7<span>★</span> STAR BARBER</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#book">Book Now</a></li>
+    <li><a href="tel:+18575402164">(857) 540-2164</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 7 Star Barber Shop · 83 Prospect St, Waltham, MA</p>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+
+// Mobile nav
+function openMob() { document.getElementById('mobNav').classList.add('open'); }
+function closeMob() { document.getElementById('mobNav').classList.remove('open'); }
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Form submit
+function sendForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  setTimeout(() => {
+    e.target.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+    document.getElementById('formOk').style.display = 'block';
+    btn.textContent = 'Request Appointment →';
+    btn.disabled = false;
+  }, 1100);
+}
+</script>
+</body>
+</html>
